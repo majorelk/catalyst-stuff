@@ -1,3 +1,4 @@
+# hello world app - catalyst basics
 FROM perl:latest
 
 COPY hello-world/Hello/ /app/
@@ -11,6 +12,20 @@ RUN cpanm Catalyst::Devel \
           Catalyst::Action::RenderView
 
 CMD ["perl","script/hello_server.pl"]
+
+# MyApp - more catalyst basics
+FROM perl:latest
+
+COPY MyApp/ /app/
+
+RUN cpanm Catalyst::Devel \
+          Catalyst::Plugin::ConfigLoader \
+          Catalyst::Plugin::Static::Simple \
+          Config::General Catalyst::View::TT \
+          Catalyst::Action::RenderView
+
+CMD ["perl","script/myapp_server.pl"]
+
 
 
 # multi-stage build example:
